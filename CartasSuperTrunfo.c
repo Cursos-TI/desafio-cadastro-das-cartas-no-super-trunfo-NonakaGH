@@ -10,10 +10,10 @@
 // Estrutura para armazenar os dados das cidades
 typedef struct {
     char codigo[4];  // Código da cidade (Exemplo: A01, B02)
-    char nome[20];   // Nome da cidade
-    int populacao;   // População da cidade
-    float area;      // Área da cidade em km²
-    double pib;      // PIB da cidade em bilhões
+    char nome[20];   // Nome da cidade ("char" para nomes)
+    int populacao;   // População da cidade ("int" para números inteiros)
+    float area;      // Área da cidade em km² ("float" para números com casas decimais)
+    double pib;      // PIB da cidade em bilhões ("double" para números com muitas casas decimais)
     int pontos_turisticos; // Número de pontos turísticos
 } Cidade;
 
