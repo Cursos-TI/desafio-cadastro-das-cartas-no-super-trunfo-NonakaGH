@@ -15,6 +15,8 @@ typedef struct {
     float area;      // Área da cidade em km² ("float" para números com casas decimais)
     double pib;      // PIB da cidade em bilhões ("double" para números com muitas casas decimais)
     int pontos_turisticos; // Número de pontos turísticos
+    float densidade;  // 📌 Densidade Populacional (População / Área)
+    double pib_per_capita; // 📌 PIB per Capita (PIB / População)
 } Cidade;
 
 // Estrutura para armazenar os dados dos estados (OBS: Eu tive que adicionar essa estrutura, não tinha nas aulas iniciais)
@@ -62,9 +64,17 @@ int main() {
 
                 printf("Digite o PIB (em bilhões): ");
                 scanf("%lf", &pais.estados[i].cidades[j].pib);
-
+                
                 printf("Digite o número de pontos turísticos: ");
                 scanf("%d", &pais.estados[i].cidades[j].pontos_turisticos);
+               
+                // 📌 Cálculos automáticos
+                pais.estados[i].cidades[j].densidade = (pais.estados[i].cidades[j].area > 0) ? 
+                    pais.estados[i].cidades[j].populacao / pais.estados[i].cidades[j].area : 0;
+
+                pais.estados[i].cidades[j].pib_per_capita = (pais.estados[i].cidades[j].populacao > 0) ? 
+                     pais.estados[i].cidades[j].pib / pais.estados[i].cidades[j].populacao : 0;
+
             }
 
             // Exibir os dados cadastrados do estado antes de prosseguir para o próximo (As partes do "colocar e tirar das caixas")
@@ -77,6 +87,8 @@ int main() {
                 printf("População: %d habitantes\n", cidade.populacao);
                 printf("Área: %.2f km²\n", cidade.area);
                 printf("PIB: %.2lf bilhões\n", cidade.pib);
+                printf("Densidade Populacional: %.2f habitantes/km²\n", cidade.densidade);
+                printf("PIB per Capita: %.2lf bilhões por habitante\n", cidade.pib_per_capita);
                 printf("Pontos turísticos: %d\n", cidade.pontos_turisticos);
             }
         }
@@ -96,13 +108,17 @@ int main() {
                 printf("População: %d habitantes\n", cidade.populacao);
                 printf("Área: %.2f km²\n", cidade.area);
                 printf("PIB: %.2lf bilhões\n", cidade.pib);
+                printf("Densidade Populacional: %.2f habitantes/km²\n", cidade.densidade);
+                printf("PIB per Capita: %.2lf bilhões por habitante\n", cidade.pib_per_capita);
                 printf("Pontos turísticos: %d\n", cidade.pontos_turisticos);
+                
             }
         }
 
         // Pergunta ao usuário se deseja cadastrar outro país
         printf("\nDeseja cadastrar outro país? (S/N): ");
-        scanf(" %c", &continuar); // Espaço antes do %c evita erro de buffer
+        getchar();
+        scanf("%c", &continuar);
 
         // Validação: enquanto a resposta não for 'S', 's', 'N' ou 'n', pede novamente
         while (continuar != 'S' && continuar != 's' && continuar != 'N' && continuar != 'n') {
