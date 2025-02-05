@@ -58,23 +58,25 @@ int main() {
 
                 printf("Digite a população: ");
                 scanf("%d", &pais.estados[i].cidades[j].populacao);
-
                 printf("Digite a área (em km²): ");
-                scanf(" %f", &pais.estados[i].cidades[j].area); // 📌 Adicionamos um espaço antes de %f
+                scanf(" %f", &pais.estados[i].cidades[j].area);
 
                 printf("Digite o PIB (em bilhões): ");
-                scanf(" %lf", &pais.estados[i].cidades[j].pib); // 📌 Adicionamos um espaço antes de %lf
+                scanf(" %lf", &pais.estados[i].cidades[j].pib);
 
-                               
-                printf("Digite o número de pontos turísticos: ");
-                scanf("%d", &pais.estados[i].cidades[j].pontos_turisticos);
-               
                 // Cálculos
                 pais.estados[i].cidades[j].densidade = (pais.estados[i].cidades[j].area > 0) ? 
                     pais.estados[i].cidades[j].populacao / pais.estados[i].cidades[j].area : 0;
 
                 pais.estados[i].cidades[j].pib_per_capita = (pais.estados[i].cidades[j].populacao > 0) ? 
-                     pais.estados[i].cidades[j].pib / pais.estados[i].cidades[j].populacao : 0;
+                    pais.estados[i].cidades[j].pib / pais.estados[i].cidades[j].populacao : 0;
+
+                printf("Densidade Populacional: %.2f habitantes/km²\n", pais.estados[i].cidades[j].densidade);
+                printf("PIB per Capita: %.8lf bilhões por habitante\n", pais.estados[i].cidades[j].pib_per_capita);
+
+                printf("Digite o número de pontos turísticos: ");
+                scanf(" %d", &pais.estados[i].cidades[j].pontos_turisticos);
+
             }
 
             // Exibir os dados cadastrados do estado antes de prosseguir para o próximo
