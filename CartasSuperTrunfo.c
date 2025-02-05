@@ -15,8 +15,8 @@ typedef struct {
     float area;      // Área da cidade em km² ("float" para números com casas decimais)
     double pib;      // PIB da cidade em bilhões ("double" para números com muitas casas decimais)
     int pontos_turisticos; // Número de pontos turísticos
-    float densidade;  // 📌 Densidade Populacional (População / Área)
-    double pib_per_capita; // 📌 PIB per Capita (PIB / População)
+    float densidade;  // Densidade Populacional (População / Área)
+    double pib_per_capita; // PIB per Capita (PIB / População)
 } Cidade;
 
 // Estrutura para armazenar os dados dos estados (OBS: Eu tive que adicionar essa estrutura, não tinha nas aulas iniciais)
@@ -41,12 +41,12 @@ int main() {
         printf("\nDigite o nome do país: ");
         scanf(" %[^\n]", pais.nome);
 
-        // Loop para cadastrar os 8 estados (A-H) (OBS: Não tem na aula, mas adicionei para dar certo a proposta do desafio)
+        // Loop para cadastrar os 8 estados (A-H)
         for (int i = 0; i < 8; i++) {
             pais.estados[i].letra = 'A' + i; // Define a letra do estado (A, B, C... H)
             printf("\n--- Cadastro do Estado %c ---\n", pais.estados[i].letra);
 
-            // Loop para cadastrar 4 cidades dentro de cada estado (OBS: A parte do "armazenar em caixas")
+            // Loop para cadastrar 4 cidades dentro de cada estado
             for (int j = 0; j < 4; j++) {
                 // Gerar código da cidade automaticamente (A01, A02...)
                 sprintf(pais.estados[i].cidades[j].codigo, "%c0%d", pais.estados[i].letra, j + 1);
@@ -60,36 +60,34 @@ int main() {
                 scanf("%d", &pais.estados[i].cidades[j].populacao);
 
                 printf("Digite a área (em km²): ");
-                scanf("%f", &pais.estados[i].cidades[j].area);
+                scanf(" %f", &pais.estados[i].cidades[j].area); // 📌 Adicionamos um espaço antes de %f
 
                 printf("Digite o PIB (em bilhões): ");
-                scanf("%lf", &pais.estados[i].cidades[j].pib);
-                
+                scanf(" %lf", &pais.estados[i].cidades[j].pib); // 📌 Adicionamos um espaço antes de %lf
+
+                               
                 printf("Digite o número de pontos turísticos: ");
                 scanf("%d", &pais.estados[i].cidades[j].pontos_turisticos);
                
-                // 📌 Cálculos automáticos
+                // Cálculos
                 pais.estados[i].cidades[j].densidade = (pais.estados[i].cidades[j].area > 0) ? 
                     pais.estados[i].cidades[j].populacao / pais.estados[i].cidades[j].area : 0;
 
                 pais.estados[i].cidades[j].pib_per_capita = (pais.estados[i].cidades[j].populacao > 0) ? 
                      pais.estados[i].cidades[j].pib / pais.estados[i].cidades[j].populacao : 0;
-
             }
 
-            // Exibir os dados cadastrados do estado antes de prosseguir para o próximo (As partes do "colocar e tirar das caixas")
+            // Exibir os dados cadastrados do estado antes de prosseguir para o próximo
             printf("\n--- Cidades cadastradas no Estado %c ---\n", pais.estados[i].letra);
             for (int j = 0; j < 4; j++) {
-                Cidade cidade = pais.estados[i].cidades[j];
-
-                printf("\nCidade %s\n", cidade.codigo);
-                printf("Nome: %s\n", cidade.nome);
-                printf("População: %d habitantes\n", cidade.populacao);
-                printf("Área: %.2f km²\n", cidade.area);
-                printf("PIB: %.2lf bilhões\n", cidade.pib);
-                printf("Densidade Populacional: %.2f habitantes/km²\n", cidade.densidade);
-                printf("PIB per Capita: %.2lf bilhões por habitante\n", cidade.pib_per_capita);
-                printf("Pontos turísticos: %d\n", cidade.pontos_turisticos);
+                printf("\nCidade %s\n", pais.estados[i].cidades[j].codigo);
+                printf("Nome: %s\n", pais.estados[i].cidades[j].nome);
+                printf("População: %d habitantes\n", pais.estados[i].cidades[j].populacao);
+                printf("Área: %.2f km²\n", pais.estados[i].cidades[j].area);
+                printf("PIB: %.2lf bilhões\n", pais.estados[i].cidades[j].pib);
+                printf("Densidade Populacional: %.2f habitantes/km²\n", pais.estados[i].cidades[j].densidade);
+                printf("PIB per Capita: %.2lf bilhões por habitante\n", pais.estados[i].cidades[j].pib_per_capita);
+                printf("Pontos turísticos: %d\n", pais.estados[i].cidades[j].pontos_turisticos);
             }
         }
 
@@ -101,24 +99,20 @@ int main() {
             printf("\nEstado: %c\n", pais.estados[i].letra);
 
             for (int j = 0; j < 4; j++) {
-                Cidade cidade = pais.estados[i].cidades[j];
-
-                printf("\nCidade %s\n", cidade.codigo);
-                printf("Nome: %s\n", cidade.nome);
-                printf("População: %d habitantes\n", cidade.populacao);
-                printf("Área: %.2f km²\n", cidade.area);
-                printf("PIB: %.2lf bilhões\n", cidade.pib);
-                printf("Densidade Populacional: %.2f habitantes/km²\n", cidade.densidade);
-                printf("PIB per Capita: %.2lf bilhões por habitante\n", cidade.pib_per_capita);
-                printf("Pontos turísticos: %d\n", cidade.pontos_turisticos);
-                
+                printf("\nCidade %s\n", pais.estados[i].cidades[j].codigo);
+                printf("Nome: %s\n", pais.estados[i].cidades[j].nome);
+                printf("População: %d habitantes\n", pais.estados[i].cidades[j].populacao);
+                printf("Área: %.2f km²\n", pais.estados[i].cidades[j].area);
+                printf("PIB: %.2lf bilhões\n", pais.estados[i].cidades[j].pib);
+                printf("Densidade Populacional: %.2f habitantes/km²\n", pais.estados[i].cidades[j].densidade);
+                printf("PIB per Capita: %.2lf bilhões por habitante\n", pais.estados[i].cidades[j].pib_per_capita);
+                printf("Pontos turísticos: %d\n", pais.estados[i].cidades[j].pontos_turisticos);
             }
         }
 
         // Pergunta ao usuário se deseja cadastrar outro país
         printf("\nDeseja cadastrar outro país? (S/N): ");
-        getchar();
-        scanf("%c", &continuar);
+        scanf(" %c", &continuar); // Removemos o `getchar();` para evitar erro de buffer
 
         // Validação: enquanto a resposta não for 'S', 's', 'N' ou 'n', pede novamente
         while (continuar != 'S' && continuar != 's' && continuar != 'N' && continuar != 'n') {
@@ -126,9 +120,9 @@ int main() {
             scanf(" %c", &continuar);
         }
 
-    } while (continuar == 'S' || continuar == 's'); // Repete se o usuário digitar 'S' ou 's', se digitar "n" finaliza
+    } while (continuar == 'S' || continuar == 's'); // Repete se o usuário digitar 'S' ou 's', se digitar "N" finaliza
 
     printf("\nPrograma finalizado!\n");
-    // Aguardando para criar o restante do programa e concluir o desafio
+
     return 0;
 }
